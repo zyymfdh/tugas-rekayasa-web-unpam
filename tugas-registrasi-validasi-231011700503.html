@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Form Registrasi</title>
+  <!-- Bootstrap 5 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    .error-message {
+      color: red;
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="container mt-5">
+    <h2 class="text-center">Form Registrasi</h2>
+    <form id="registrationForm" novalidate>
+      <!-- Nama Lengkap -->
+      <div class="mb-3">
+        <label for="fullName" class="form-label">Nama Lengkap</label>
+        <input type="text" class="form-control" id="fullName" placeholder="Masukkan nama lengkap" required>
+        <div class="invalid-feedback">
+          Nama lengkap tidak boleh kosong.
+        </div>
+      </div>
+
+      <!-- Email -->
+      <div class="mb-3">
+        <label for="email" class="form-label">Email</label>
+        <input type="email" class="form-control" id="email" placeholder="Masukkan email" required>
+        <div class="invalid-feedback">
+          Harap masukkan alamat email yang valid.
+        </div>
+      </div>
+
+      <!-- Password -->
+      <div class="mb-3">
+        <label for="password" class="form-label">Password</label>
+        <input type="password" class="form-control" id="password" placeholder="Masukkan password" minlength="8" required>
+        <div class="invalid-feedback">
+          Password harus minimal 8 karakter.
+        </div>
+      </div>
+
+      <!-- Konfirmasi Password -->
+      <div class="mb-3">
+        <label for="confirmPassword" class="form-label">Konfirmasi Password</label>
+        <input type="password" class="form-control" id="confirmPassword" placeholder="Masukkan kembali password" required>
+        <div class="invalid-feedback" id="passwordMismatch">
+          Password tidak sesuai.
+        </div>
+      </div>
+
+      <!-- Tombol Submit -->
+      <button type="submit" class="btn btn-primary">Daftar</button>
+    </form>
+  </div>
+
+  <!-- Bootstrap 5 JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+
+  <script>
+    // Validasi form
+    (function () {
+      'use strict'
+      
+      // Ambil form elemen
+      var form = document.getElementById('registrationForm');
+
+      form.addEventListener('submit', function (event) {
+        event.preventDefault();
+        event.stopPropagation();
+
+        // Validasi field
+        if (!form.checkValidity()) {
+          form.classList.add('was-validated');
+        } else {
+          var password = document.getElementById('password').value;
+          var confirmPassword = document.getElementById('confirmPassword').value;
+
+          // Cek apakah password dan konfirmasi password sama
+          if (password !== confirmPassword) {
+            document.getElementById('passwordMismatch').style.display = 'block';
+          } else {
+            document.getElementById('passwordMismatch').style.display = 'none';
+            // Jika valid, kirim form (bisa diganti dengan logika lain)
+            alert('Registrasi berhasil!');
+            form.reset();
+            form.classList.remove('was-validated');
+          }
+        }
+      }, false);
+    })();
+  </script>
+</body>
+</html>
